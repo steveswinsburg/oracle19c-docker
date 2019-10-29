@@ -32,6 +32,8 @@ steveswinsburg/oracle19c-ee
 
 Check out the parameters below for a description of the options available.
 
+*Note that there is currently an issue that means that the database will not start up correctly when restarted, see https://github.com/steveswinsburg/oracle19c-docker/issues/1*
+
 Configuration
 -------------
 
