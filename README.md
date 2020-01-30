@@ -30,6 +30,19 @@ docker run \
 steveswinsburg/oracle19c-ee
 ```
 
+Optionally, you can use the following run commmand to avoid getting "No disk space" issues as you gradually insert more and more data into your Database.
+
+```
+docker run \
+-p 1521:1521 -p 5500:5500 \
+-e ORACLE_SID=orcl \
+-e ORACLE_PWD=password \
+-e ORACLE_MEM=4000 \
+-v /Users/<your-username>/path/to/store/db/files/:/opt/oracle/oradata \
+-d \
+steveswinsburg/oracle19c-ee
+```
+
 Check out the parameters below for a description of the options available.
 
 *Note that there is currently an issue that means that the database will not start up correctly when restarted, see https://github.com/steveswinsburg/oracle19c-docker/issues/1*
@@ -49,6 +62,10 @@ Configuration
                   The data volume to use for the database.
                   Has to be writable by the Unix "oracle" (uid: 54321) user inside the container!
                   If omitted the database will not be persisted over container recreation.
+   -v /Users/<your-username>/path/to/store/db/files/:/opt/oracle/oradata
+                  Mount the data volume into one of your local folders.
+                  If ommitted you might run into a "No disk space" issue at some point as your database
+                  keeps growing and docker does not resize it's volume.
    -v /opt/oracle/scripts/startup | /docker-entrypoint-initdb.d/startup
                   Optional: A volume with custom scripts to be run after database startup.
                   For further details see the "Running scripts after setup and on startup" section below.
