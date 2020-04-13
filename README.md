@@ -78,7 +78,7 @@ Configuration
 ```
    -e ORACLE_CHARACTERSET: The character set to use when creating the database (default: AL32UTF8)
    -e ORACLE_CDB:          Flag to create database as container database (default: false)
-   -e ORACLE_PDB:          Specify the pdbname/pdbanme prefix if one or more pdb need to be created (default: None)
+   -e ORACLE_PDB:          Specify the pdbname/pdbname prefix if one or more pdb need to be created (default: None)
    -e ORACLE_PDB_NUM:      If PDB enabled, specify the number of PDB to be created (default: 0)
 
 ```
@@ -86,15 +86,28 @@ Configuration
 Connecting to Oracle
 --------------------
 
-Once the container has been started you can connect to it like any other database. For example:
-`sqlplus sys/<your password>@//localhost:1521/<your SID> as sysdba`
+Once the container has been started you can connect to it like any other database. 
 
-If you did not set the `ORACLE_PWD` parameter, check the docker run output for the password.
+For example, SQL Developer:
+```
+Hostname: localhost
+Port: 1521
+SID: <your SID>
+Username: sys
+Password: <your password>
+Role: AS SYSDBA
+
+```
+
+Or via SQL Plus
+`sqlplus sys/<your password>@//localhost:1521/<your SID> as sysdba`
 
 Changing the password
 ---------------------
 
-The password for the SYS account can be changed via the docker exec command. Note, the container has to be running:
+Note: If you did not set the `ORACLE_PWD` parameter, check the docker run output for the password.
+
+The password for the SYS account can be changed via the `docker exec` command. Note, the container has to be running:
 
 First run `docker ps` to get the container ID. Then run:
 `docker exec <container id> ./setPassword.sh <new password>`
