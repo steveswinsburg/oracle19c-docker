@@ -19,11 +19,14 @@ Before you begin
 
 Building
 --------
-Build the image:
-`cd OracleDatabase/SingleInstance/dockerfiles`
-`./buildDockerImage.sh -v 19.3.0 -e`
 
-If the build fails saying you are out of space, check how much space you have available on your disk. If it looks ok, prune old Docker images:
+
+````
+cd OracleDatabase/SingleInstance/dockerfiles
+./buildDockerImage.sh -v 19.3.0 -e
+````
+
+If the build fails saying you are out of space, check how much space you have available on your disk. If it looks ok, prune old Docker images via: 
 `yes | docker image prune > /dev/null`
 
 Running
