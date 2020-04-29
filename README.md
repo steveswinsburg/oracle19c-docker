@@ -15,7 +15,8 @@ Before you begin
 1. Clone `https://github.com/oracle/docker-images`.
 1. Download the Oracle Database 19c binary `LINUX.X64_193000_db_home.zip` from http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html
 1. Put the zip in the `OracleDatabase/SingleInstance/dockerfiles/19.3.0` directory. **Do not unzip it.**
-1. If https://github.com/oracle/docker-images/pull/1576 is not yet merged, edit `OracleDatabase/SingleInstance/dockerfiles/19.3.0/dbca.rsp.tmpl`, and change `totalMemory=2048` to `totalMemory=4000`.
+1. If https://github.com/oracle/docker-images/pull/1576 is not yet merged, edit `OracleDatabase/SingleInstance/dockerfiles/19.3.0/dbca.rsp.tmpl`, and change `totalMemory=2048` to `totalMemory=4000` or whatever value you want.
+1. In Docker Desktop, update the allocated memory to a value more than the value above.
 
 Building
 --------
