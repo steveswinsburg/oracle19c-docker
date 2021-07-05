@@ -24,7 +24,7 @@ Building
 
 ````
 cd OracleDatabase/SingleInstance/dockerfiles
-./buildDockerImage.sh -v 19.3.0 -e
+./buildContainerImage.sh -v 19.3.0 -e
 ````
 
 If the build fails saying you are out of space, check how much space you have available on your disk. If it looks ok, prune old Docker images via: 
