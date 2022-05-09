@@ -119,3 +119,12 @@ First run `docker ps` to get the container ID. Then run:
 
 Or as root:
 `docker exec -u 0 -it <container id> /bin/bash`
+
+Using SQLPlus within the container
+----------------------------------
+
+Once on the container (see above), connect to SQLPlus like so:
+```
+sqlplus /nolog
+connect sys/password@orcl as sysdba
+```
