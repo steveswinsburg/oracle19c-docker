@@ -15,7 +15,7 @@ Before you begin
 1. Clone `https://github.com/oracle/docker-images`.
 1. Download the Oracle Database 19c binary `LINUX.X64_193000_db_home.zip` from http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html
 1. Put the zip in the `OracleDatabase/SingleInstance/dockerfiles/19.3.0` directory. **Do not unzip it.**
-1. In Docker Desktop, ensure you have a large enough amount of memory allocated. These instructions will set the total memory to 2000MB, so make sure Docker has a value higher than that.
+1. In Docker Desktop, ensure you have a large enough amount of memory allocated. These instructions will set the total memory to 4000MB, so make sure Docker has a value higher than that.
 
 Building
 --------
@@ -41,8 +41,8 @@ docker run \
 -p 5500:5500 \
 -e ORACLE_PDB=orcl \
 -e ORACLE_PWD=password \
--e INIT_SGA_SIZE=1536 \
--e INIT_PGA_SIZE=512 \
+-e INIT_SGA_SIZE=3000 \
+-e INIT_PGA_SIZE=1000 \
 -v /opt/oracle/oradata \
 -d \
 oracle/database:19.3.0-ee
@@ -58,8 +58,8 @@ docker run \
 -p 1521:1521 -p 5500:5500 \
 -e ORACLE_PDB=orcl \
 -e ORACLE_PWD=password \
--e INIT_SGA_SIZE=1536 \
--e INIT_PGA_SIZE=512 \
+-e INIT_SGA_SIZE=3000 \
+-e INIT_PGA_SIZE=1000 \
 -v /Users/<your-username>/path/to/store/db/files/:/opt/oracle/oradata \
 -d \
 oracle/database:19.3.0-ee
@@ -75,8 +75,8 @@ Configuration
    -e ORACLE_SID: The Oracle Database SID that should be used (default: ORCLCDB)
    -e ORACLE_PDB: The Oracle Database Service Name that should be used (default: ORCLPDB1)
    -e ORACLE_PWD: The Oracle Database SYS password (default: auto generated)
-   -e INIT_SGA_SIZE: The amount of SGA to allocate to Oracle. This should be about 75% of the total memory.
-   -e INIT_PGA_SIZE: The amount of PGA to alloxate to oracle. This should be about 25% of the total memory. 
+   -e INIT_SGA_SIZE: The amount of SGA to allocate to Oracle. This should be 75% of the total memory you want Oracle to use. 
+   -e INIT_PGA_SIZE: The amount of PGA to alloxate to oracle. This should be the remaining 25% of the total memory you want Oracle to use.  
    -e ORACLE_CHARACTERSET: The character set to use when creating the database (default: AL32UTF8)
    -v /opt/oracle/oradata
                   The data volume to use for the database.
@@ -87,6 +87,8 @@ Configuration
                   If omitted you might run into a "No disk space" issue at some point as your database keeps growing and docker does not resize its volume.
    -d:            Run in detached mode. You want this otherwise `Ctrl-C` will kill the container.
 ```
+
+Note that if you do not specify INIT_SGA_SIZE and INIT_PGA_SIZE then Oracle will determine the memory to allocate based on the number of CPUs etc, and for desktop environments this will sit at about 2000MB.
 
 Connecting to Oracle
 --------------------
