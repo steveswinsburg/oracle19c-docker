@@ -88,7 +88,7 @@ Configuration
    -d:            Run in detached mode. You want this otherwise `Ctrl-C` will kill the container.
 ```
 
-Note that if you do not specify INIT_SGA_SIZE and INIT_PGA_SIZE then Oracle will determine the memory to allocate based on the number of CPUs etc, and for desktop environments this will sit at about 2000MB.
+Note that if you do not specify INIT_SGA_SIZE and INIT_PGA_SIZE then Oracle will determine the memory to allocate based on the number of CPUs, available memory in your machine etc, and for desktop environments this could be from about 2000MB to 5000MB. If you want control over this, set the values.
 
 Connecting to Oracle
 --------------------
