@@ -13,13 +13,116 @@ Before you begin
 ----------------
 
 1. Clone `https://github.com/oracle/docker-images`.
-1. Download the Oracle Database 19c binary `LINUX.X64_193000_db_home.zip` from http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html
+1. Download the Oracle Database 19c binary from http://www.oracle.com/technetwork/database/enterprise-edition/downloads/index.html
+    1. For X86, get `LINUX.X64_193000_db_home.zip`.
+    1. For ARM, get `LINUX.ARM64_1919000_db_home.zip`.
 1. Put the zip in the `OracleDatabase/SingleInstance/dockerfiles/19.3.0` directory. **Do not unzip it.**
-1. In Docker Desktop, ensure you have a large enough amount of memory allocated. These instructions will set the total memory to 4000MB, so make sure Docker has a value higher than that.
+1. In your docker application (e.g. Colima, Docker Desktop etc), ensure you have a large enough amount of memory allocated to docker. These instructions will set the total memory to 4000MB, so make sure Docker has a value higher than that.
+
+Start your container environment
+--------------------------------
+These instructions assume you are using Colima. Start up colima with the `-e` flag and an editor will open where you can review your settings. Also note that these instructions are assuming v0.5.3 and MacOS >= 13 (Ventura).
+
+`colima start -e`
+
+**For x86:**
+```
+# Number of CPUs to be allocated to the virtual machine.
+# Default: 2
+cpu: 4
+ 
+# Size of the disk in GiB to be allocated to the virtual machine.
+# NOTE: changing this has no effect after the virtual machine has been created.
+# Default: 60
+disk: 100
+ 
+# Size of the memory in GiB to be allocated to the virtual machine.
+# Default: 2
+memory: 8
+ 
+# Architecture of the virtual machine (x86_64, aarch64, host).
+# Default: host
+arch: x86_64
+ 
+# Container runtime to be used (docker, containerd).
+# Default: docker
+runtime: docker
+
+...
+ 
+# Virtual Machine type (qemu, vz)
+# NOTE: this is macOS 13 only. For Linux and macOS <13.0, qemu is always used.
+#
+# vz is macOS virtualization framework and requires macOS 13
+#
+# Default: qemu
+vmType: vz
+ 
+# Volume mount driver for the virtual machine (virtiofs, 9p, sshfs).
+#
+# virtiofs is limited to macOS and vmType `vz`. It is the fastest of the options.
+#
+# 9p is the recommended and the most stable option for vmType `qemu`.
+#
+# sshfs is faster than 9p but the least reliable of the options (when there are lots
+# of concurrent reads or writes).
+#
+# Default: virtiofs (for vz), sshfs (for qemu)
+mountType: virtiofs
+```
+
+**For ARM:** 
+```
+# Number of CPUs to be allocated to the virtual machine.
+# Default: 2
+cpu: 4
+ 
+# Size of the disk in GiB to be allocated to the virtual machine.
+# NOTE: changing this has no effect after the virtual machine has been created.
+# Default: 60
+disk: 100
+ 
+# Size of the memory in GiB to be allocated to the virtual machine.
+# Default: 2
+memory: 8
+ 
+# Architecture of the virtual machine (x86_64, aarch64, host).
+# Default: host
+arch: aarch64
+ 
+# Container runtime to be used (docker, containerd).
+# Default: docker
+runtime: docker
+
+...
+ 
+# Virtual Machine type (qemu, vz)
+# NOTE: this is macOS 13 only. For Linux and macOS <13.0, qemu is always used.
+#
+# vz is macOS virtualization framework and requires macOS 13
+#
+# Default: qemu
+vmType: vz
+
+# Utilise rosetta for amd64 emulation (requires m1 mac and vmType `vz`)
+# Default: false
+rosetta: true
+ 
+# Volume mount driver for the virtual machine (virtiofs, 9p, sshfs).
+#
+# virtiofs is limited to macOS and vmType `vz`. It is the fastest of the options.
+#
+# 9p is the recommended and the most stable option for vmType `qemu`.
+#
+# sshfs is faster than 9p but the least reliable of the options (when there are lots
+# of concurrent reads or writes).
+#
+# Default: virtiofs (for vz), sshfs (for qemu)
+mountType: virtiofs
+```
 
 Building
 --------
-
 
 ````
 cd OracleDatabase/SingleInstance/dockerfiles
