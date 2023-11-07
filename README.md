@@ -151,9 +151,9 @@ docker run \
 oracle/database:19.3.0-ee
 ```
 
-On first run, the database will be created and setup for you. This will take about 10-15 minutes. Open Docker Dashboard and watch the progress. Then you can connect.
+On first run, the database will be created and setup for you. This will take about 10-15 minutes. Open the container logs and watch the progress. Then you can connect.
 
-Optionally, you can use the following run commmand to avoid getting "No disk space" issues as you gradually insert more and more data into your database.
+Optionally, you can use the following run command to avoid getting "No disk space" issues as you gradually insert more and more data into your database.
 
 ```
 docker run \
